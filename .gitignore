@@ -1,0 +1,13 @@
+/target
+/jdon.log
+/lib
+/build.xml
+/classes
+/dist
+/weblib
+/report
+/.project
+/.classpath
+/settings
+/logs
+.gradle
