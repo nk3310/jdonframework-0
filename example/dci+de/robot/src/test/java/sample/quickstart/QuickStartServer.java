@@ -1,4 +1,4 @@
-package sample.functional;
+package sample.quickstart;
 
 import org.eclipse.jetty.server.Server;
 
@@ -11,7 +11,7 @@ import org.eclipse.jetty.server.Server;
 public class QuickStartServer {
 
 	public static final int PORT = 8080;
-	public static final String CONTEXT = "/dci-de-robot";
+	public static final String CONTEXT = "/robot_dci_de";
 	//public static final String[] TLD_JAR_NAMES = new String[] { "sitemesh", "spring-webmvc", "shiro-web",
 	//		"springside-core" };
 

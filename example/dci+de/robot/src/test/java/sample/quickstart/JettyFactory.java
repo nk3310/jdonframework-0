@@ -1,8 +1,8 @@
-package sample.functional;
+package sample.quickstart;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
@@ -54,9 +54,7 @@ public class JettyFactory {
 			jarNameExprssions.add(".*/" + jarName + "-[^/]*\\.jar$");
 		}
 
-		context.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
-				StringUtils.join(jarNameExprssions, '|'));
-
+		
 	}
 
 	/**
