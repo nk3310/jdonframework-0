@@ -27,7 +27,7 @@ public class Constants implements Serializable {
 
 	public final static String USER_SAVE_ERROR = "USER.CREATE.ERROR";
 
-	private String jndiname = "java:comp/env/jdbc/TestDS";
+	private String jndiname = "java:comp/env/jdbc/myds";
 
 	/**
 	 * @param jndiname
