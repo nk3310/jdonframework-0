@@ -104,9 +104,9 @@ public class ResourceManagerContext {
 	}
 
 	private boolean validate(UserModel user) {
-		validation.use(new NotNull(user.getUsername())).message("name", "涓嶈兘涓虹┖");
-		validation.use(new NotEmail(user.getEmail())).message("email", "閭欢鏍煎紡涓嶅");
-		validation.use(new NotEqual(user.getPassword(), user.getVerifypassword())).message("password", "涓ゆ杈撳叆涓嶄竴鑷�");
+		validation.use(new NotNull(user.getUsername())).message("name", "不能为空");
+		validation.use(new NotEmail(user.getEmail())).message("email", "邮件格式不对");
+		validation.use(new NotEqual(user.getPassword(), user.getVerifypassword())).message("password", "两次输入不一致");
 		return validation.hasErrors() ? true : false;
 	}
 
