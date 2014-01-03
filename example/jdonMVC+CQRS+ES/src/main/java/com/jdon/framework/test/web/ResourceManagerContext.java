@@ -72,7 +72,7 @@ public class ResourceManagerContext {
 	public Represent index() {
 		logger.debug(" enter index ");
 		List userList = userQuery.getUserList();
-		return new Html("/index.jsp", "userList", userList);
+		return new Html("/WEB-INF/index.jsp", "userList", userList);
 
 	}
 
