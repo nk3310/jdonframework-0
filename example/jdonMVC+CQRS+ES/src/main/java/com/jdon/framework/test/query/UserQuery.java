@@ -19,15 +19,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.jdon.annotation.Component;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.framework.test.domain.UserModel;
 import com.jdon.framework.test.repository.ModelCacheManager;
 import com.jdon.framework.test.repository.UserRepository;
+import com.jdon.framework.test.web.ResourceManagerContext;
 
 @Component("userQuery")
 public class UserQuery {
 
+	private final static Logger logger = Logger.getLogger(UserQuery.class);
+	
 	private final UserRepository userRepository;
 
 	private final ModelCacheManager modelCacheManager;
@@ -43,9 +48,21 @@ public class UserQuery {
 		List ids = getUsers();
 		for (Object o : ids) {
 			String userId = (String) o;
+			
+			//debug by chenj begin
+			logger.info(" {debug by chenj} userid:" + userId ); 
+			//debug by chenj end
+						
 			list.add(userRepository.getUser(userId));
-
+			
 		}
+		
+		//debug by chenj begin
+		for (UserModel i : list) {
+		logger.info(" {debug by chenj} list.userid:" + i.getUserId() + "  list.username" + i.getUsername() ); 
+		}
+		//debug by chenj end
+				
 		return list;
 	}
 

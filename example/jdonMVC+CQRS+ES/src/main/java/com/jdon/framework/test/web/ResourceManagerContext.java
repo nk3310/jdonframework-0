@@ -71,7 +71,15 @@ public class ResourceManagerContext {
 	@Path("/")
 	public Represent index() {
 		logger.debug(" enter index ");
-		List userList = userQuery.getUserList();
+		List<UserModel> userList = userQuery.getUserList();
+		
+		//debug by chenj begin
+		for (UserModel o : userList) {
+			logger.info(" {debug by chenj} userid:" + o.getUserId() + "  username" + o.getUsername() ); 
+		}
+		//debug by chenj end
+		
+		
 		return new Html("/WEB-INF/index.jsp", "userList", userList);
 
 	}

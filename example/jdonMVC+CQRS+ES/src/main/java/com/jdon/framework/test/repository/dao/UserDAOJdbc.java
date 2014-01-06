@@ -94,26 +94,40 @@ public class UserDAOJdbc implements UserRepository {
 
 	@Around
 	public UserModel getUser(String Id) {
-		logger.debug(" enter getUser:" + Id);
+		//debug by chenj begin
+		logger.info("{debug by chenj} getUser:"  + Id);
+		//debug by chenj end
 
 		String GET_FIELD = "select  * from testuser where userId = ?";
 		List queryParams = new ArrayList();
 		queryParams.add(Id);
-
+		
+		
 		UserModel ret = null;
 
 		try {
 			List list = jdbcTemp.queryMultiObject(queryParams, GET_FIELD);
 			Iterator iter = list.iterator();
 			if (iter.hasNext()) {
+				//debug by chenj begin
+				logger.info("{debug by chenj} iter.hasNext()" );
+				//debug by chenj end
 				Map map = (Map) iter.next();
 				ret = new UserModel();
-				ret.setUsername((String) map.get("name"));
-				ret.setUserId((String) map.get("userId"));
+				ret.setUsername((String) map.get("NAME"));
+				ret.setUserId((String) map.get("USERID"));
+				//debug by chenj begin
+				logger.info("{debug by chenj} map.get('NAME') = " + map.get("NAME") + " map.get('USERID') = " + map.get("USERID") );
+				//debug by chenj end
 			}
 		} catch (Exception e) {
 			logger.error("getUser" + e);
 		}
+		
+		//debug by chenj begin
+		logger.info("{debug by chenj} ret.getUserId():"  + ret.getUserId());
+		//debug by chenj end
+		
 		return ret;
 	}
 
