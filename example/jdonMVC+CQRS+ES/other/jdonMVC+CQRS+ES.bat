@@ -9,4 +9,6 @@ start explorer E:\workspace\indigo\jdon\jdonmvc_cqrs_es
 start explorer E:\jetty\logs
 
 CD E:\jetty
-call jetty.bat
+del logs\jdon.log
+cls
+@call jetty.bat
