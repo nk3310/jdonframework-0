@@ -59,7 +59,7 @@ public class UserQuery {
 		
 		//debug by chenj begin
 		for (UserModel i : list) {
-		logger.info(" {debug by chenj} list.userid:" + i.getUserId() + "  list.username" + i.getUsername() ); 
+		logger.info(" {debug by chenj} list.userid: " + i.getUserId() + "  list.username: " + i.getUsername() ); 
 		}
 		//debug by chenj end
 				

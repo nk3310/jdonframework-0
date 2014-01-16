@@ -75,7 +75,7 @@ public class ResourceManagerContext {
 		
 		//debug by chenj begin
 		for (UserModel o : userList) {
-			logger.info(" {debug by chenj} userid:" + o.getUserId() + "  username" + o.getUsername() ); 
+			logger.info(" {debug by chenj} userid: " + o.getUserId() + "  username: " + o.getUsername() ); 
 		}
 		//debug by chenj end
 		
@@ -87,7 +87,7 @@ public class ResourceManagerContext {
 	@Path("/user/{userId}")
 	public Represent get(int userId) {
 		UserModel user = getUser(Integer.toString(userId));
-		return new Html("/editUser.jsp", "user", user);
+		return new Html("/WEB-INF/editUser.jsp", "user", user);
 	}
 
 	@Path("/users")
