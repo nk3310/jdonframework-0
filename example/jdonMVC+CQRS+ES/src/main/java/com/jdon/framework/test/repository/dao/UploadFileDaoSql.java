@@ -32,10 +32,11 @@ import com.jdon.framework.test.Constants;
 import com.jdon.framework.test.domain.UploadFile;
 import com.jdon.framework.test.repository.UploadRepository;
 import com.jdon.model.query.JdbcTemp;
+import com.jdon.util.Debug;
 
 @Component("uploadRepository")
 public class UploadFileDaoSql implements UploadRepository {
-	private final static Logger logger = Logger.getLogger(UserDAOJdbc.class);
+	private final static Logger logger = Logger.getLogger(UploadFileDaoSql.class);
 
 	protected JdbcTemp jdbcTemp;
 
@@ -59,23 +60,73 @@ public class UploadFileDaoSql implements UploadRepository {
 	@Override
 	public UploadFile getUploadFile(String parentId) {
 		String GET_ALL_ITEMS = "select  objectId, name, description, datas, messageId, size, contentType from upload where messageId = ?";
-		Collection params = new ArrayList(1);
+		Collection params = new ArrayList();
 		params.add(parentId);
 		UploadFile ret = null;
 		try {
 			List list = jdbcTemp.queryMultiObject(params, GET_ALL_ITEMS);
 			Iterator iter = list.iterator();
 			if (iter.hasNext()) {
+				
+				//debug by chenj begin
+				logger.info("{debug by chenj} iter.hasNext()" );
+				//debug by chenj end
+				
 				ret = new UploadFile();
 				Map map = (Map) iter.next();
-				ret.setId((String) map.get("objectId"));
-				ret.setName((String) map.get("name"));
-				ret.setDescription((String) map.get("description"));
+				
+				
+				
+				ret.setId((String) map.get("OBJECTID"));
+				
+				//debug by chenj begin
+				logger.info("{debug by chenj} map.get('OBJECTID') " + (String) map.get("OBJECTID") );
+				//debug by chenj end
+				
+				ret.setName((String) map.get("NAME"));
+				
+				//debug by chenj begin
+				logger.info("{debug by chenj} map.get('NAME') " + (String) map.get("NAME") );
+				//debug by chenj end
+				
+				//ret.setDescription((String) map.get("DESCRIPTION"));
+				
+				//debug by chenj begin
+				//logger.info("{debug by chenj} map.get('DESCRIPTION') " + (String) map.get("DESCRIPTION") );
+				//debug by chenj end
+				
+				
 				ret.setData((byte[]) map.get("datas"));
 
-				ret.setParentId((String) map.get("messageId"));
-				ret.setSize(((Integer) map.get("size")).intValue());
-				ret.setContentType((String) map.get("contentType"));
+				ret.setParentId((String) map.get("MESSAGEID"));
+				
+				//debug by chenj begin
+				logger.info("{debug by chenj} map.get('MESSAGEID') " + (String) map.get("MESSAGEID") );
+				//debug by chenj end
+				
+				
+				ret.setSize(((Integer) map.get("SIZE")).intValue());
+				
+				//debug by chenj begin
+				logger.info("{debug by chenj} map.get('SIZE') " + (String) map.get("SIZE").toString() );
+				//debug by chenj end
+				
+				ret.setContentType((String) map.get("CONTENTTYPE"));
+				
+				//debug by chenj begin
+				logger.info("{debug by chenj} map.get('CONTENTTYPE') " + (String) map.get("CONTENTTYPE") );
+				//debug by chenj end
+				
+				
+				//debug by chenj begin
+				logger.info("{debug by chenj} ret.getId = " + ret.getId());
+				logger.info("{debug by chenj} ret.getName = " + ret.getName());
+				//logger.info("{debug by chenj} ret.getDescription = " + ret.getDescription());
+				logger.info("{debug by chenj} ret.ParentId = " + ret.getParentId());
+				logger.info("{debug by chenj} ret.Size = " + ret.getSize());
+				logger.info("{debug by chenj} ret.ContentType = " + ret.getContentType());
+				
+				//debuy by chenj end
 			}
 		} catch (Exception se) {
 			logger.error("getAdjunct messageId=" + parentId + se);
@@ -120,8 +171,26 @@ public class UploadFileDaoSql implements UploadRepository {
 			queryParams.add(now);
 
 			queryParams.add(uploadFile.getContentType());
+			
+			
+			
+			//debug by chenj begin
+			int i = 1;
+			Object key = null;
+			
+			Iterator iter = queryParams.iterator();
+			while (iter.hasNext()) {
+				key = iter.next();
+				if (key != null) {
+					
+					logger.info("{debug by chenj} parameter " + i + " = " + key.toString());
+				}
+				i++;
+			}
+     		//debug by chenj end
 
 			this.jdbcTemp.operate(queryParams, ADD_SQL);
+			
 
 		} catch (Exception e) {
 			logger.error("createUploadFile uploadId =" + uploadFile.getId() + e);

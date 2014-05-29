@@ -127,6 +127,9 @@ public class ResourceManagerContext {
 	@Path("/showUpload")
 	public Represent showUpload(String pid) {
 		UserModel user = entityFactory.getUser(pid);
+		//debug by chenj begin
+		logger.info("{debug by chenj} showupload user =" + user.getUserId());
+		//debug by chenj end
 		Image image = new Image();
 		image.setData(user.getUploadFile().getData(), user.getUploadFile().getContentType());
 		return image;
