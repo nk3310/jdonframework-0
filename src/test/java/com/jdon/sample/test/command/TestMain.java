@@ -24,15 +24,15 @@ public class TestMain {
 	public static void main(String[] args) {
 		AppUtil appUtil = new AppUtil();
 		AComponentIF a = (AComponentIF) appUtil.getComponentInstance("producerforCommand");
-		BModel bModel = new BModel("one");
-		TestCommand testCommand = a.ma(bModel);
+		BModel bModel = new BModel("model-b");
+		TestCommand testCommand = a.send(bModel);
 		int i = 0;
 		long start = System.currentTimeMillis();
-		while (testCommand.getOutput() != 199) {
+		while (testCommand.getOutput() != 1999) {
 			i++;
 		}
 		long stop = System.currentTimeMillis();
-		Assert.assertEquals(testCommand.getOutput(), 199);
-		System.out.print("ok " + "  " + (stop - start));
+		Assert.assertEquals(testCommand.getOutput(), 1999);
+		System.out.print(", time = " + (stop - start) + ", i = " + i);
 	}
 }

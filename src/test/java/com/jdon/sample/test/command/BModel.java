@@ -30,7 +30,7 @@ public class BModel {
 	}
 
 	@OnCommand("CommandmaTest")
-	public void save(TestCommand testCommand) {
+	public void process(TestCommand testCommand) {
 		this.state = testCommand.getInput() + state;
 		testCommand.setOutput(state);
 

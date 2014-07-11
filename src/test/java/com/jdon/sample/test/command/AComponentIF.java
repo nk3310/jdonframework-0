@@ -21,5 +21,5 @@ import com.jdon.annotation.model.Send;
 public interface AComponentIF {
 
 	@Send("CommandmaTest")
-	public TestCommand ma(@Receiver BModel bModel);
+	public TestCommand send(@Receiver BModel bModel);
 }

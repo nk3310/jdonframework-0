@@ -22,8 +22,8 @@ import com.jdon.annotation.Introduce;
 @Introduce("componentmessage")
 public class AComponent implements AComponentIF {
 
-	public TestCommand ma(BModel bModel) {
-		System.out.print("send to BModel =" + bModel.getId());
-		return new TestCommand(99);
+	public TestCommand send(BModel bModel) {
+		System.out.print("send to BModel = " + bModel.getId());
+		return new TestCommand(1899);
 	}
 }
