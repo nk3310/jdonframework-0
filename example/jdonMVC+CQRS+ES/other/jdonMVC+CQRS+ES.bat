@@ -1,7 +1,7 @@
 @echo off
 E:
 CD E:\h2\bin
-@start javaw -cp "h2-1.3.174.jar;%H2DRIVERS%;%CLASSPATH%" org.h2.tools.Console %*
+@start javaw -cp "h2-1.3.174.jar" org.h2.tools.Console %*
 @if errorlevel 1 pause
 
 start E:\eclipse\indigo\eclipse\eclipse.exe -data D:\workspace\workspace37\jdon
