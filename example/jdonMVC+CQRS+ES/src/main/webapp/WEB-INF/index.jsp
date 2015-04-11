@@ -16,8 +16,7 @@ response.setDateHeader("Expires", 0);
 <body>
 <div style="text-align: center;">
 <h3>JdonFramework Application DEMO
-  <br />note: add above 5 line, you will find other pages (Auto Pagination).
-  <br/>Source Download: <a href="sourceforge.net/projects/jdon/files/JdonFramework-App/samples-6.6/">click here</a>
+ 
 </h3>
 
 
@@ -48,7 +47,7 @@ response.setDateHeader("Expires", 0);
 <a href="newUser.jsp">add</a>
 
 </div>
-* if you cann't find any items that you just added, please modify database config in  META-INF/context.xml
+
 <p>
 * reload this page, you will find the pictures if you just uploaded them.
 
