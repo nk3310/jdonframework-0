@@ -21,6 +21,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import java.sql.Blob;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -59,10 +61,11 @@ public class UploadFileDaoSql implements UploadRepository {
 	 */
 	@Override
 	public UploadFile getUploadFile(String parentId) {
-		String GET_ALL_ITEMS = "select  objectId, name, description, datas, messageId, size, contentType from upload where messageId = ?";
+		String GET_ALL_ITEMS = "select OBJECTID, NAME, DESCRIPTION, DATAS, MESSAGEID, SIZE, CONTENTTYPE from UPLOAD where MESSAGEID = ?";
 		Collection params = new ArrayList();
 		params.add(parentId);
 		UploadFile ret = null;
+		Blob blob = null;
 		try {
 			List list = jdbcTemp.queryMultiObject(params, GET_ALL_ITEMS);
 			Iterator iter = list.iterator();
@@ -74,7 +77,6 @@ public class UploadFileDaoSql implements UploadRepository {
 				
 				ret = new UploadFile();
 				Map map = (Map) iter.next();
-				
 				
 				
 				ret.setId((String) map.get("OBJECTID"));
@@ -89,14 +91,27 @@ public class UploadFileDaoSql implements UploadRepository {
 				logger.info("{debug by chenj} map.get('NAME') " + (String) map.get("NAME") );
 				//debug by chenj end
 				
-				//ret.setDescription((String) map.get("DESCRIPTION"));
+				ret.setDescription((String) map.get("DESCRIPTION"));
 				
 				//debug by chenj begin
-				//logger.info("{debug by chenj} map.get('DESCRIPTION') " + (String) map.get("DESCRIPTION") );
+				logger.info("{debug by chenj} map.get('DESCRIPTION') " + (String) map.get("DESCRIPTION") );
 				//debug by chenj end
 				
 				
-				ret.setData((byte[]) map.get("datas"));
+				//ret.setData((byte[]) map.get("DATAS")); // ??? java.sql.Blob.getBytes()
+				
+				blob = (Blob) map.get("DATAS");
+				
+				byte[] datas = blob.getBytes(1, (int) blob.length());
+				if (datas == null) {
+					logger.warn("upload datas is null!");
+				}
+				ret.setData(datas);
+				
+				
+				//debug by chenj begin
+				logger.info("{debug by chenj} map.get('DATAS') " + datas.toString() ); 
+				//debug by chenj end
 
 				ret.setParentId((String) map.get("MESSAGEID"));
 				
@@ -108,7 +123,7 @@ public class UploadFileDaoSql implements UploadRepository {
 				ret.setSize(((Integer) map.get("SIZE")).intValue());
 				
 				//debug by chenj begin
-				logger.info("{debug by chenj} map.get('SIZE') " + (String) map.get("SIZE").toString() );
+				logger.info("{debug by chenj} map.get('SIZE') " + (String) map.get("SIZE").toString() ); 
 				//debug by chenj end
 				
 				ret.setContentType((String) map.get("CONTENTTYPE"));
@@ -121,7 +136,7 @@ public class UploadFileDaoSql implements UploadRepository {
 				//debug by chenj begin
 				logger.info("{debug by chenj} ret.getId = " + ret.getId());
 				logger.info("{debug by chenj} ret.getName = " + ret.getName());
-				//logger.info("{debug by chenj} ret.getDescription = " + ret.getDescription());
+				logger.info("{debug by chenj} ret.getDescription = " + ret.getDescription());
 				logger.info("{debug by chenj} ret.ParentId = " + ret.getParentId());
 				logger.info("{debug by chenj} ret.Size = " + ret.getSize());
 				logger.info("{debug by chenj} ret.ContentType = " + ret.getContentType());
@@ -165,7 +180,7 @@ public class UploadFileDaoSql implements UploadRepository {
 			}
 			queryParams.add(datas);
 			queryParams.add(uploadFile.getParentId());
-			queryParams.add(new Integer(uploadFile.getSize()));
+			queryParams.add(new Long(uploadFile.getSize()));
 
 			long now = System.currentTimeMillis();
 			queryParams.add(now);

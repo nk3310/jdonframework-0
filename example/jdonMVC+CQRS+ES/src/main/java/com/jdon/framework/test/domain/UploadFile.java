@@ -28,7 +28,7 @@ public class UploadFile {
 
 	private String contentType;
 
-	private int size;
+	private long size;
 
 	// 所属父ID
 	private String parentId;
@@ -73,11 +73,11 @@ public class UploadFile {
 		this.contentType = contentType;
 	}
 
-	public int getSize() {
+	public long getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(long size) {
 		this.size = size;
 	}
 

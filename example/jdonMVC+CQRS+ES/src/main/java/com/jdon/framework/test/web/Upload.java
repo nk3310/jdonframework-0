@@ -53,7 +53,7 @@ public class Upload {
 	@Path("/singleupload")
 	public Represent upload(FormFile file) {
 		request.getSession().setAttribute("formFile", file);
-		return new Text("你上传文件名是：" + file.getFileName());
+		return new Text("你上传文件名是：" + file.getFileName() + " 文件长度是：" + file.getFileSize());
 	}
 
 	@POST

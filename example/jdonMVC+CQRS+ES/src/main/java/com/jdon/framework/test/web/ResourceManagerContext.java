@@ -106,6 +106,10 @@ public class ResourceManagerContext {
 			uploadFile.setData(file.getFileData());
 			uploadFile.setName(file.getFileName());
 			uploadFile.setContentType(file.getContentType());
+			//debug by chenj begin
+			uploadFile.setDescription(file.getFileName() + " description");
+			uploadFile.setSize(file.getFileSize());
+			//debug by chenj end
 		}
 		user.es.created(new UserCreatedEvent(user, uploadFile));
 		return new State("/result.jsp");
