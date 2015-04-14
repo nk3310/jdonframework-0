@@ -73,12 +73,7 @@ public class ResourceManagerContext {
 		logger.debug(" enter index ");
 		List<UserModel> userList = userQuery.getUserList();
 		
-		//debug by chenj begin
-		for (UserModel o : userList) {
-			logger.info(" {debug by chenj} userid: " + o.getUserId() + "  username: " + o.getUsername() ); 
-		}
-		//debug by chenj end
-		
+
 		
 		return new Html("/WEB-INF/index.jsp", "userList", userList);
 
@@ -106,10 +101,9 @@ public class ResourceManagerContext {
 			uploadFile.setData(file.getFileData());
 			uploadFile.setName(file.getFileName());
 			uploadFile.setContentType(file.getContentType());
-			//debug by chenj begin
 			uploadFile.setDescription(file.getFileName() + " description");
 			uploadFile.setSize(file.getFileSize());
-			//debug by chenj end
+			
 		}
 		user.es.created(new UserCreatedEvent(user, uploadFile));
 		return new State("/result.jsp");
@@ -131,9 +125,6 @@ public class ResourceManagerContext {
 	@Path("/showUpload")
 	public Represent showUpload(String pid) {
 		UserModel user = entityFactory.getUser(pid);
-		//debug by chenj begin
-		logger.info("{debug by chenj} showupload user =" + user.getUserId());
-		//debug by chenj end
 		Image image = new Image();
 		image.setData(user.getUploadFile().getData(), user.getUploadFile().getContentType());
 		return image;

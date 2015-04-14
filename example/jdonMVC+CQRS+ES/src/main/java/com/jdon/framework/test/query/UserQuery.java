@@ -48,21 +48,11 @@ public class UserQuery {
 		List ids = getUsers();
 		for (Object o : ids) {
 			String userId = (String) o;
-			
-			//debug by chenj begin
-			logger.info(" {debug by chenj} userid:" + userId ); 
-			//debug by chenj end
-						
+	
 			list.add(userRepository.getUser(userId));
 			
 		}
-		
-		//debug by chenj begin
-		for (UserModel i : list) {
-		logger.info(" {debug by chenj} list.userid: " + i.getUserId() + "  list.username: " + i.getUsername() ); 
-		}
-		//debug by chenj end
-				
+			
 		return list;
 	}
 
