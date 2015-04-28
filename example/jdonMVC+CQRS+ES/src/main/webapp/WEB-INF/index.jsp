@@ -31,7 +31,7 @@ response.setDateHeader("Expires", 0);
 <c:forEach var="user" items="${userList}">
 <tr bgcolor="#ffffff">
 <td><c:if test="${not empty  user.uploadFile}">
-        	  pic :<img src="<%=request.getContextPath() %>/showUpload?pid=${user.userId}"  border='0' width="20" height="20"/>	
+        	  <img src="<%=request.getContextPath() %>/showUpload?pid=${user.userId}"  border='0' width="20" height="20"/>	
         </c:if>
 </td>
 <td>${user.userId}</td><td>${user.username}</td>
